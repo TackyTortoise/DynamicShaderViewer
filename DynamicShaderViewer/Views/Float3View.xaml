@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="DynamicShaderViewer.Views.Float3View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DynamicShaderViewer.Views"
+             xmlns:viewModel="clr-namespace:DynamicShaderViewer.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" Height="75" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <viewModel:Float3ViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding ShaderName}" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+        <Label Content="Float3 :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="0" Text="{Binding XValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding UpdateShaderValuesCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="1" Text="{Binding YValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding UpdateShaderValuesCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2" Text="{Binding ZValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding UpdateShaderValuesCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <Viewbox Grid.Column="2" Margin="0,15,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="15" Height="15">
+            <Button Content="N" Command="{Binding NormalizeValue}" Width="30" Height="30" FontSize="15"/>
+        </Viewbox>
+        <!--<Rectangle Fill="#19F4F4F5" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="314" Grid.ColumnSpan="3"/>
+        <Rectangle Fill="#19F4F4F5" HorizontalAlignment="Left" Height="1" VerticalAlignment="Bottom" Width="314" Grid.ColumnSpan="3"/>-->
+    </Grid>
+</UserControl>

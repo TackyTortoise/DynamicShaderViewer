@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="DynamicShaderViewer.Views.IntView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DynamicShaderViewer.Views"
+             xmlns:viewModel="clr-namespace:DynamicShaderViewer.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             Height="50"><!--Width="314.214"-->
+    <UserControl.DataContext>
+        <viewModel:IntViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="111*"/>
+            <ColumnDefinition Width="46*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding ShaderName}" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Height="28"/>
+        <Label Content="Integer :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="59"/>
+        <TextBox Height="30" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="1" Text="{Binding ContentValue}" Grid.ColumnSpan="1" TextAlignment="Right">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding UpdateShaderValuesCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <!--<Rectangle Fill="#19F4F4F5" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="314" Grid.ColumnSpan="3"/>
+        <Rectangle Fill="#19F4F4F5" HorizontalAlignment="Left" Height="1" VerticalAlignment="Bottom" Width="314" Grid.ColumnSpan="3"/>-->
+    </Grid>
+</UserControl>

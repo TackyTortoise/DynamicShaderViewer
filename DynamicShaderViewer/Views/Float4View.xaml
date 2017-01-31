@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="DynamicShaderViewer.Views.Float4View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DynamicShaderViewer.Views"
+             xmlns:viewModel="clr-namespace:DynamicShaderViewer.ViewModel"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             Height="75">
+
+    <UserControl.DataContext>
+        <viewModel:Float4ViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding ShaderName}" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4"/>
+        <Label Content="Float4 :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="0" Text="{Binding XValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right">
+            
+        </TextBox>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="1" Text="{Binding YValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right"/>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2" Text="{Binding ZValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right"/>
+        <TextBox Height="23" Margin="10,0,10,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="3" Text="{Binding WValue, StringFormat=N2, Mode=TwoWay}" TextAlignment="Right"/>
+
+        <Viewbox Width="15" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="3" Margin="0,15,10,0">
+            <Button Content="C" Command="{Binding SwitchColorPicker}"/>
+        </Viewbox>
+
+        <xctk:ColorCanvas Margin="0,0,27,0" Grid.ColumnSpan="4" Grid.Column="0" IsEnabled="{Binding EnableColorPicker}" HorizontalAlignment="Right" Visibility="{Binding EnableColorPicker, Converter={StaticResource BoolToVisConverter}}" SelectedColor="{Binding SelectedColor}" Background="#FF212121" BorderBrush="#FF454545" Foreground="#FF181818">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedColorChanged">
+                    <i:InvokeCommandAction Command="{Binding UpdateShaderValuesCommand}"/>
+                    <i:InvokeCommandAction Command="{Binding ColorPickerChange}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </xctk:ColorCanvas>
+    </Grid>
+</UserControl>

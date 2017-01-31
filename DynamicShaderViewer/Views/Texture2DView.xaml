@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="DynamicShaderViewer.Views.Texture2DView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DynamicShaderViewer.Views"
+             xmlns:viewModel="clr-namespace:DynamicShaderViewer.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="75" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <viewModel:Texture2DViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Label Content="{Binding ShaderName}" HorizontalAlignment="Left" Margin="84,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Texture2D :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" VerticalAlignment="Bottom" Margin="10" IsEnabled="False" Text="{Binding FileName}"/>
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="30" Margin="10">
+            <Button Content="..." Margin="0" Width="45" Command="{Binding LoadTextureCommand}"/>
+        </Viewbox>
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="73" Margin="0,10,50,0">
+            <Button Content="Reload" Margin="0" Width="63" Command="{Binding ReloadTextureCommand}"/>
+        </Viewbox>
+    </Grid>
+</UserControl>
